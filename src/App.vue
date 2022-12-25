@@ -120,11 +120,15 @@ body {
   background-color: #4aaaac;
   border: none;
   outline: none;
-  padding: 11px 30px;
+  padding: 12px;
+  width: 150px;
   color: #fff;
   font-weight: 600;
   font-size: 17px;
   border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.7s ease 0s;
 }
 
 .wrapper-text button:hover {
