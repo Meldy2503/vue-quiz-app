@@ -324,7 +324,7 @@ export default {
 .btn .next-btn:hover,
 .btn .submit-btn:hover {
   color: #fff;
-  box-shadow: inset 12rem 0rem 0rem 0rem #333;
+  background-color: #333;
 }
 
 .count-down {
