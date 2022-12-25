@@ -58,6 +58,7 @@ a {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.7s ease 0s;
 }
 
 a:hover {
