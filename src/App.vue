@@ -26,6 +26,7 @@ body,
 html {
   height: 100%;
   width: 100%;
+  position: relative;
 }
 body {
   font-family: "Poppins", sans-serif;

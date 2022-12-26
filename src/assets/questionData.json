@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "question": "Which Vue directive is used for two-way binding?",
+    "options": [
+      { "answer": "v-on", "isCorrect": false },
+      { "answer": "v-else", "isCorrect": false },
+      { "answer": "v-model", "isCorrect": true },
+      { "answer": "v-if", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Who is the creator of vueJS ?",
+    "options": [
+      { "answer": "Jeff Bezos", "isCorrect": false },
+      { "answer": "Elon Musk", "isCorrect": false },
+      { "answer": "Evan You", "isCorrect": true },
+      { "answer": "Tony Stark", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "All are examples of vue directives EXCEPT",
+    "options": [
+      { "answer": "v-model", "isCorrect": false },
+      { "answer": "v-cloak", "isCorrect": false },
+      { "answer": "v-on", "isCorrect": false },
+      { "answer": "v-off", "isCorrect": true }
+    ]
+  },
+
+  {
+    "id": 4,
+    "question": "Which version of Vue was Launched on 2020?",
+    "options": [
+      { "answer": "Vue 2", "isCorrect": false },
+      { "answer": "Vue 1", "isCorrect": false },
+      { "answer": "Vue 4", "isCorrect": false },
+      { "answer": "Vue 3", "isCorrect": true }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "All are examples of life cyle methods in EXCEPT",
+    "options": [
+      { "answer": "isMounted()", "isCorrect": true },
+      { "answer": "beforeMount()", "isCorrect": false },
+      { "answer": "created()", "isCorrect": false },
+      { "answer": "updated()", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Which of the following is NOT a Javascript Framework",
+    "options": [
+      { "answer": "Vue", "isCorrect": false },
+      { "answer": "Styled-Components", "isCorrect": true },
+      { "answer": "React", "isCorrect": false },
+      { "answer": "Angular", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Composition API can be used on which version?",
+    "options": [
+      { "answer": "Vue 5", "isCorrect": false },
+      { "answer": "Vue 2 Only", "isCorrect": false },
+      { "answer": "Vue 3 Only", "isCorrect": false },
+      { "answer": "Both Vue 2 and Vue 3", "isCorrect": true }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "What is the full form of NPM?",
+    "options": [
+      {
+        "answer": "New Package Manager",
+        "isCorrect": false
+      },
+      {
+        "answer": "Node Packet Manager",
+        "isCorrect": false
+      },
+      {
+        "answer": "Node Package Manage",
+        "isCorrect": false
+      },
+      {
+        "answer": "Node Package Manager",
+        "isCorrect": true
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Which of the following directives is used for iteration in Vuejs",
+    "options": [
+      { "answer": "v-model", "isCorrect": false },
+      { "answer": "v-for", "isCorrect": true },
+      { "answer": "v-if", "isCorrect": false },
+      { "answer": "v-show", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Did you enjoy using this app?",
+    "options": [
+      { "answer": "yes", "isCorrect": true },
+      { "answer": "no", "isCorrect": false },
+      { "answer": "not sure", "isCorrect": false },
+      {
+        "answer": "don't want to answer",
+        "isCorrect": false
+      }
+    ]
+  }
+]
