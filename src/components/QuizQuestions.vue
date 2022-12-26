@@ -1,6 +1,27 @@
 <template>
-  <div class="container">
-    <div class="contents">
+  <!-- welcome page -->
+  <div v-show="!startQuiz" class="landingPage">
+    <div class="landingPage-contents">
+      <div class="landingPage-img">
+        <img src="../assets/icon6.png" alt="icon" />
+      </div>
+      <div class="landingPage-text">
+        <h1>QUIZ APP</h1>
+        <p>
+          You are presented with questions and four options, you have 30 seconds
+          to answer each question after which you will be automatically moved to
+          the next question. Failure to select an answer within the time limit
+          will result in a loss of points. At the end of the quiz, your total
+          score will be displayed. Good luck!!
+        </p>
+        <button @click="handleStartQuiz()">Start Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- start quiz page -->
+  <div class="question_container" v-show="startQuiz">
+    <div class="question-contents">
       <p class="question-no">
         Question {{ currentQuestion }} of {{ questions.length }}
       </p>
@@ -38,6 +59,8 @@
       </div>
     </div>
   </div>
+
+  <!-- display result -->
   <TotalPoints
     v-show="showResult"
     :totalPoints="points"
@@ -48,7 +71,7 @@
 <script>
 import TotalPoints from "./TotalPoints.vue";
 export default {
-  name: "QuizQuestions",
+  name: "QuizApp",
   props: ["totalPoints", "totalQuestions", "countDownTimerFn"],
   data() {
     return {
@@ -56,6 +79,7 @@ export default {
       points: 0,
       countDown: 30,
       timer: null,
+      startQuiz: false,
       showResult: false,
       questions: [
         {
@@ -180,6 +204,11 @@ export default {
   },
 
   methods: {
+    handleStartQuiz() {
+      this.startQuiz = true;
+      this.countDownTimer();
+    },
+
     correctAnswer(isCorrect) {
       if (isCorrect) {
         this.points += 1;
@@ -223,7 +252,82 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.wrapper {
+}
+/* landing page stles */
+.landingPage {
+  background-image: url(../assets/pattern.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.landingPage-contents {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.3);
+  padding: 100px 50px;
+}
+
+.landingPage-img {
+  width: 47%;
+}
+.landingPage-img img {
+  max-width: 100%;
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.landingPage-text {
+  width: 48%;
+  text-align: center;
+}
+
+.landingPage-text h1 {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.landingPage-text p {
+  text-align: left;
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.landingPage-text button {
+  background-color: #4aaaac;
+  border: none;
+  outline: none;
+  padding: 12px;
+  width: 150px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 17px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.7s ease 0s;
+}
+
+.landingPage-text button:hover {
+  background-color: #6c757d;
+}
+
+/* quiz question section styles  */
+.question-container {
   margin: 0 auto;
   max-width: 1200px;
   text-align: center;
@@ -234,7 +338,7 @@ export default {
   justify-content: center;
   position: relative;
 }
-.contents {
+.question-contents {
   background-image: linear-gradient(
       to left top,
       rgb(255, 255, 255, 0.7),
@@ -245,11 +349,12 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   padding: 30px 0 40px 0;
-  width: 80%;
+  width: 60%;
   margin: 70px auto;
   border-radius: 15px;
   color: #090909;
   box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 .question-no {
@@ -264,7 +369,7 @@ export default {
   text-align: center;
   line-height: 1.4;
   margin-bottom: 15px;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
 .options-container {
@@ -280,8 +385,8 @@ export default {
   background-color: #4aaaac;
   color: #fff;
   font-size: 18px;
-  font-weight: 600;
   width: 70%;
+  font-weight: 600;
   padding: 13px;
   margin: 13px auto 0 auto;
   border-radius: 5px;
@@ -358,22 +463,71 @@ export default {
 }
 
 /* media-queries */
+@media (max-width: 1280px) {
+  .question-contents {
+    width: 70%;
+  }
+}
 @media (max-width: 960px) {
+  .landingPage-contents {
+    width: 95%;
+    padding: 100px 40px;
+  }
+
+  .question-contents {
+    width: 80%;
+  }
   .options-container button {
     width: 80%;
   }
 }
-@media (max-width: 768px) {
-  .contents {
-    width: 95%;
+
+@media (max-width: 767px) {
+  .landingPage {
+    height: 100%;
+  }
+  .landingPage-contents {
+    flex-direction: column;
+    margin: 15px 0;
+    padding: 30px 40px 60px 40px;
+  }
+  .landingPage-text {
+    width: 100%;
+  }
+  .landingPage-img {
+    width: 100%;
+  }
+  .landingPage-img img {
+    height: 100%;
+  }
+  .question-contents {
+    width: 90%;
     margin: 40px auto;
   }
   .options-container button {
     font-size: 17px;
-    width: 90%;
+    width: 85%;
   }
   .question {
     font-size: 17px;
+  }
+}
+
+@media (max-width: 500px) {
+  .landingPage-contents {
+    padding: 30px 20px 60px 20px;
+  }
+  .landingPage-text h1 {
+    font-size: 30px;
+  }
+  .landingPage-text p {
+    font-size: 16px;
+  }
+  .question-contents {
+    width: 95%;
+  }
+  .options-container button {
+    width: 90%;
   }
 }
 </style>
