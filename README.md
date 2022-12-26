@@ -1,7 +1,7 @@
 # quiz-app-vue
 
 A simple quiz app built with vue which utilizes timer functions.
-Arthur: Okafor Emelder
+
 
 ## Project setup
 
