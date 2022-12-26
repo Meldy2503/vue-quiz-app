@@ -23,14 +23,14 @@
       <div class="btn">
         <button
           class="next-btn"
-          v-if="currentQuestion < questions.length ? true : false"
+          v-show="currentQuestion < questions.length"
           @click="handleNextQuestion()"
         >
           Next
         </button>
         <button
           class="submit-btn"
-          v-if="currentQuestion === questions.length ? true : false"
+          v-show="currentQuestion === questions.length"
           @click="displayResult()"
         >
           Submit
@@ -48,8 +48,8 @@
 <script>
 import TotalPoints from "./TotalPoints.vue";
 export default {
-  props: ["totalPoints", "totalQuestions"],
   name: "QuizQuestions",
+  props: ["totalPoints", "totalQuestions", "countDownTimerFn"],
   data() {
     return {
       currentQuestion: 1,
@@ -178,6 +178,7 @@ export default {
       ],
     };
   },
+
   methods: {
     correctAnswer(isCorrect) {
       if (isCorrect) {
@@ -189,6 +190,7 @@ export default {
 
     displayResult() {
       this.showResult = true;
+      this.countDown = 1;
     },
 
     countDownTimer() {
@@ -198,7 +200,11 @@ export default {
           this.countDownTimer();
         }, 1000);
       } else if (this.countDown === 0) {
-        this.handleNextQuestion();
+        if (this.currentQuestion === this.questions.length) {
+          this.displayResult();
+        } else {
+          this.handleNextQuestion();
+        }
       }
     },
 
@@ -208,9 +214,6 @@ export default {
       this.countDown = 30;
       this.countDownTimer();
     },
-  },
-  mounted() {
-    this.countDownTimer();
   },
 
   components: {

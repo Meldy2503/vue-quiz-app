@@ -13,12 +13,12 @@
           will result in a loss of points. At the end of the quiz, your total
           score will be displayed. Good luck!!
         </p>
-        <button @click="AttemptQuiz()">Start Quiz</button>
+        <button @click="AttemptQuiz()" v-on="countDownTimer">Start Quiz</button>
       </div>
     </div>
   </div>
   <div v-show="startQuiz">
-    <QuizQuestions />
+    <QuizQuestions :countDownTimerFn="countDownTimer" />
   </div>
 </template>
 
@@ -36,7 +36,6 @@ export default {
       this.startQuiz = true;
     },
   },
-
   components: {
     QuizQuestions,
   },
