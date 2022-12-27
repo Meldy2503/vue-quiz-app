@@ -124,7 +124,6 @@ export default {
       clearTimeout(this.timer);
       this.options = this.questions[this.currentQuestion].options;
       this.options = shuffle(this.options);
-      console.log(this.options);
       this.currentQuestion += 1;
       this.countDown = 30;
       this.countDownTimer();
