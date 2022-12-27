@@ -35,7 +35,7 @@
         <div class="options-container">
           <button
             type="button"
-            v-for="(item, index) in questions[currentQuestion - 1].options"
+            v-for="(item, index) in options"
             :key="index"
             @click="correctAnswer(item.isCorrect)"
           >
@@ -73,7 +73,8 @@
 <script>
 import TotalPoints from "./TotalPoints.vue";
 import QuestionData from "../assets/questionData.json";
-
+import { shuffle } from 'lodash';
+// let shuffledOptions = shuffle(this.questions[this.currentQuestion].options)
 export default {
   name: "QuizApp",
   props: ["totalPoints", "totalQuestions", "countDownTimerFn"],
@@ -86,6 +87,7 @@ export default {
       startQuiz: false,
       showResult: false,
       questions: QuestionData,
+      options: shuffle(QuestionData[0].options)
     };
   },
 
@@ -120,6 +122,9 @@ export default {
 
     handleNextQuestion() {
       clearTimeout(this.timer);
+      this.options = this.questions[this.currentQuestion].options;
+      this.options = shuffle(this.options);
+      console.log(this.options);
       this.currentQuestion += 1;
       this.countDown = 30;
       this.countDownTimer();
