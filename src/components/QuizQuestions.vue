@@ -35,9 +35,9 @@
         <div class="options-container">
           <button
             type="button"
-            v-for="(item, index) in questions[currentQuestion - 1].options"
+            v-for="(item, index) in options"
             :key="index"
-            @click="correctAnswer(item.isCorrect)"
+            @click="correctAnswer(item.isCorrect, item.answer)"
           >
             {{ item.answer }}
           </button>
@@ -73,6 +73,7 @@
 <script>
 import TotalPoints from "./TotalPoints.vue";
 import QuestionData from "../assets/questionData.json";
+import { shuffle } from 'lodash';
 
 export default {
   name: "QuizApp",
@@ -80,12 +81,15 @@ export default {
   data() {
     return {
       currentQuestion: 1,
-      points: 0,
+      points: null,
+      answersArray: [],
+      arr: null,
       countDown: 30,
       timer: null,
       startQuiz: false,
       showResult: false,
       questions: QuestionData,
+      options: shuffle(QuestionData[0].options)
     };
   },
 
@@ -95,11 +99,10 @@ export default {
       this.countDownTimer();
     },
 
-    correctAnswer(isCorrect) {
+    correctAnswer(isCorrect, answer) {
       if (isCorrect) {
-        this.points += 1;
-      } else {
-        this.points;
+        this.answersArray.push(answer);
+        this.arr = new Set(this.answersArray);
       }
     },
 
@@ -120,6 +123,8 @@ export default {
 
     handleNextQuestion() {
       clearTimeout(this.timer);
+      this.options = this.questions[this.currentQuestion].options;
+      this.options = shuffle(this.options);
       this.currentQuestion += 1;
       this.countDown = 30;
       this.countDownTimer();
@@ -128,6 +133,7 @@ export default {
     displayResult() {
       this.showResult = true;
       this.countDown = 1;
+      this.points = this.arr.size;
     },
   },
 
