@@ -33,28 +33,15 @@
           {{ questions[currentQuestion - 1].question }}
         </p>
         <div class="options-container">
-          <button
-            type="button"
-            v-for="(item, index) in options"
-            :key="index"
-            @click="correctAnswer(item.isCorrect, item.answer)"
-          >
+          <button type="button" v-for="(item, index) in options" :key="index" @click="correctAnswer(item)">
             {{ item.answer }}
           </button>
         </div>
         <div class="btn">
-          <button
-            class="next-btn"
-            v-show="currentQuestion < questions.length"
-            @click="handleNextQuestion()"
-          >
+          <button class="next-btn" v-show="currentQuestion < questions.length" @click="handleNextQuestion()">
             Next
           </button>
-          <button
-            class="submit-btn"
-            v-show="currentQuestion === questions.length"
-            @click="displayResult()"
-          >
+          <button class="submit-btn" v-show="currentQuestion === questions.length" @click="displayResult()">
             Submit
           </button>
         </div>
@@ -62,11 +49,7 @@
     </div>
 
     <!-- display result -->
-    <TotalPoints
-      v-show="showResult"
-      :totalPoints="points"
-      :totalQuestions="questions.length"
-    />
+    <TotalPoints v-show="showResult" :totalPoints="points" :totalQuestions="questions.length" />
   </div>
 </template>
 
@@ -82,8 +65,9 @@ export default {
     return {
       currentQuestion: 1,
       points: null,
+      ans: null,
       answersArray: [],
-      arr: null,
+      correctAnswers: [],
       countDown: 30,
       timer: null,
       startQuiz: false,
@@ -99,10 +83,23 @@ export default {
       this.countDownTimer();
     },
 
-    correctAnswer(isCorrect, answer) {
-      if (isCorrect) {
-        this.answersArray.push(answer);
-        this.arr = new Set(this.answersArray);
+    correctAnswer(item) {
+      this.ans = {};
+      const option = `option${this.currentQuestion}`;
+      if (item) {
+        this.ans = {
+          [option]: {
+            answer: item.answer,
+            isCorrect: item.isCorrect
+          }
+        }
+      } else {
+        this.ans = {
+          [option]: {
+            answer: null,
+            isCorrect: false
+          }
+        }
       }
     },
 
@@ -123,6 +120,17 @@ export default {
 
     handleNextQuestion() {
       clearTimeout(this.timer);
+      if (this.ans) {
+        this.answersArray.push(this.ans);
+      } else {
+        this.answersArray.push({
+          [`option${this.currentQuestion}`]: {
+            answer: null,
+            isCorrect: false
+          }
+        });
+      }
+      this.ans = null;
       this.options = this.questions[this.currentQuestion].options;
       this.options = shuffle(this.options);
       this.currentQuestion += 1;
@@ -131,9 +139,21 @@ export default {
     },
 
     displayResult() {
+      clearTimeout(this.timer);
+      if (this.ans) {
+        this.answersArray.push(this.ans);
+      } else {
+        this.answersArray.push({
+          [`option${this.currentQuestion}`]: {
+            answer: null,
+            isCorrect: false
+          }
+        });
+      }
+      this.correctAnswers = this.answersArray.filter((item, index) => item[`option${index + 1}`].isCorrect);
+      this.points = this.correctAnswers.length;
       this.showResult = true;
-      this.countDown = 1;
-      this.points = this.arr.size;
+      // console.log(Object.values(item))
     },
   },
 
