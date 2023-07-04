@@ -153,7 +153,6 @@ export default {
       this.correctAnswers = this.answersArray.filter((item, index) => item[`option${index + 1}`].isCorrect);
       this.points = this.correctAnswers.length;
       this.showResult = true;
-      // console.log(Object.values(item))
     },
   },
 
