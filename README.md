@@ -1,5 +1,5 @@
 
-# Quiz App Vue
+# Vue Quiz App
 
 ![vue-quiz-app](vue-quiz-app.png)
 
